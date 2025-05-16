@@ -202,3 +202,33 @@ if($clima == 'chuva'){
 
 ?>
 ```
+
+## Exercícios - Operadores
+
+Arquivo 'media.php'
+
+```php
+<?php
+
+// abaixo de 5 reprovado
+// abaixo de 6 exame
+// maior igual a 6 aprovado
+
+$nota1 = 4;
+$nota2 = 5;
+$nota3 = 5;
+$media = ($nota1 + $nota2 + $nota3) / 3;
+
+if($media < 5){
+    echo "<strong>Reprovado.<br></strong>";
+}else if($media < 6){
+    echo '<strong>Exame.<br></strong>';
+}else{
+    echo '<strong>Aprovado.<br></strong>';
+}
+
+echo "Sua média: $media";
+
+?>
+
+```
