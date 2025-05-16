@@ -232,3 +232,26 @@ echo "Sua média: $media";
 ?>
 
 ```
+
+Arquivo 'conversor.php'
+
+```php
+
+<?php
+//Ler o valor em real e converter para dolar
+
+$valor = 1;
+$valorDolar = 5.60;
+//Usando o 'number_format' passamos como parametro
+//valor, quantidade de casas decimais, separador decimal, separador de milhar
+$valorFinal = number_format($valor / $valorDolar, 2, ',', '.');
+
+
+echo "Real para Dólar: U$ $valorFinal<br>";
+$valorFinal = number_format($valorDolar * $valor, 2, ',', '.');
+echo "Dólar para Real: R$ $valorFinal";
+
+
+?>
+
+```
