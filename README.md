@@ -124,12 +124,7 @@ Arquivo 'operadores.php'
 ```php
 <?php
 //Operadores Relacionais
-//== Comparação
-//!= Diferente
-// > Maior que
-// >= Maior igual que
-// < Menor que
-// <= Menor igual que
+
 
 $a = 10;
 $b = 20;
@@ -142,13 +137,21 @@ $c = 10;
 
 echo "<h2>Variáveis</h2>";
 echo "
-    a = 10<br>
-    b = 20<br>
-    c = 10<br>
+    a = $a<br>
+    b = $b<br>
+    c = $c<br>
     <br>
 ";
 
 echo "<h2>Operadores Relacionais</h2>";
+echo '
+== Comparação<br>
+!= Diferente<br>
+> Maior que<br>
+>= Maior igual que<br>
+< Menor que<br>
+<= Menor igual que<br><br>
+';
 echo "a == c: ";
 var_dump($a == $c);
 echo "<br>";
@@ -172,6 +175,30 @@ echo "<br>";
 echo "a >= b: ";
 var_dump($a >= $b);
 echo "<br>";
+
+//Condicionais simples e composta
+echo "<h2>Condicionais Simples e Compostas</h2>";
+$idade = 17;
+
+echo "Idade: $idade<br>";
+
+if($idade >= 18){
+    echo 'Você é maior de idade<br>';
+}else{
+    echo 'Você é menor de idade<br>';
+}
+
+//Composta
+
+$clima = 'sol';
+
+if($clima == 'chuva'){
+    echo 'Seria tao bom ficar em casa com essa chuva :(. Mas vá la e pegue seu guarda-chuvas';
+}else if($clima == 'sol'){
+    echo 'Tempo bom pra pegar o protetor solar e ir para a praia!';
+}else{
+    echo 'O clima ta bom pra ficar em casa e lavar a roupa.';
+}
 
 ?>
 ```
