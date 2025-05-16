@@ -59,4 +59,7 @@ echo "<h2>Resultado de Combate</h2>
 
 ?>
 
-``` 
+```
+
+# Criação do projeto
+- Criar uma pasta dentro de \xamppz\htdocs\[pasta_projeto]
