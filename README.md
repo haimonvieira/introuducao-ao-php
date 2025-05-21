@@ -390,3 +390,291 @@ foreach($clientes as $item){
 
 
 ```
+
+## Fazendo formulário
+
+Arquivo `index.php`
+
+```php
+
+<?php
+
+if(isset($_GET['msg']) && $_GET['msg'] == 'ok'){
+    echo "<h2>Dados enviados com sucesso!</h2>";
+}
+
+?>
+
+```
+
+```html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <style>
+        body{
+            padding: 0 2rem;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+        }
+        input{
+            all: unset;
+            border: 1px solid #000;
+            padding: .5rem;
+        }
+        input:focus{
+            border: 2px solid black;
+        }
+        label{
+            display: block;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+        input[type="submit"]{
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            padding: .5rem 1rem;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dados para Contato</h1>
+    <!-- 'action' para onde vai as informacoes do formulario -->
+    <!-- GET envia pela URL e o posto a informação é encapsulada -->
+    <form action="recebimento.php" method="post">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email">
+        <label for="telefone">Telefone</label>
+        <input type="tel" name="telefone" id="telefone">
+        <input type="submit" value="Enviar">
+    </form>
+    
+</body>
+</html>
+
+```
+
+Arquivo `recebimento.php`
+
+```php
+
+<?php
+//Aqui é tratado os dados que o formulário envia para o servidor
+
+$nome = $_POST['nome'];
+$email = $_POST['email'];
+$telefone = $_POST['telefone'];
+
+//Depois é enviado para o html e mostrar as informacoes
+
+?>
+
+```
+
+```html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recebimento</title>
+    <style>
+        body{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            padding: 0 2rem;
+        }
+        a{
+            text-decoration: none;
+            border: 1px solid black;
+            padding: .5rem;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>Recebimento do Formulário</h1>
+    <hr>
+    <p><strong>Nome: </strong><?= $nome?></p>
+    <p><strong>E-mail: </strong><?= $email?></p>
+    <p><strong>Telefone: </strong><?= $telefone?></p>
+    <hr><br>
+    <a href="index.php?msg=ok">Voltar</a>
+
+
+</body>
+</html>
+
+```
+
+# Exercício
+
+Fazer um currículo
+
+Arquivo `index.php`
+
+```html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo</title>
+    <style>
+        body{
+            padding: 5rem;
+            font-size: 1rem;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        form{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border: 1px solid #000;
+            padding: 2rem;
+        }
+        label{
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input{
+            all:unset;
+            border: 1px solid #000;
+            padding: .5rem;
+            margin-bottom: 10px;
+        }
+        input:focus{
+            border: 2px solid #000;
+        }
+        .box:nth-child(1){
+            grid-column: span 2;
+        }
+        textarea{
+            font-size: 1rem;
+            padding: .5rem;
+            resize: none;
+            width: 100%;
+            height: 250px;
+            grid-column: span 2;
+        }
+        input[type="submit"]{
+            text-align: center;
+            width: 100%;
+            background: rgba(0, 0, 0, .5);
+            color: white;
+            font-weight: 600;
+            grid-column: span 2;
+        }
+        .box:nth-child(5){
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Seu Currículo</h1>
+
+    <form action="receber.php" method="post">
+
+        <div class="box">
+            <img src="https://placehold.co/200?text=Foto&font=roboto" alt="">
+        </div>
+
+        <div class="box">
+            <label for="nomeCompleto">Nome completo</label>
+            <input type="text" name="nome-completo" id="nomeCompleto">
+        </div>
+
+        <div class="box">
+            <label for="telefone">Telefone</label>
+            <input type="tel" name="telefone" id="telefone">
+        </div>
+
+        <div class="box">
+            <label for="endereco">Endereço</label>
+            <input type="text" name="endereco" id="endereco">
+        </div>
+
+        <div class="box">
+            <label for="habilidade">Habilidades</label>
+            <textarea name="habilidade" id="habilidade"></textarea>
+        </div>
+
+        <input type="submit" name="enviar" id="enviar" value="Enviar">
+
+        
+    </form>
+
+</body>
+</html>
+
+```
+
+Arquivo `receber.php`
+
+```php
+
+<?php
+
+$nome = $_POST['nome-completo'];
+$endereco = $_POST['endereco'];
+$telefone = $_POST['telefone'];
+$habilidades = $_POST['habilidade'];
+
+?>
+
+```
+
+```html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Currículo</title>
+    <style>
+        body{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            padding: 5rem;
+            font-size: 1rem;
+        }
+        img{
+            grid-column: span 2;
+        }
+        .box{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border: 1px solid #000;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <img src="https://placehold.co/200?text=Foto&font=roboto" alt="">
+        <p><strong>Nome: </strong> <?= $nome?></p>
+        <p><strong>Telefone: </strong><?= $telefone?></p>
+        <p><strong>Endereço: </strong><?= $endereco?></p>
+        <p><strong>Habilidades: </strong><?= $habilidades?></p>
+
+    </div>
+
+    
+    
+</body>
+</html>
+
+```
