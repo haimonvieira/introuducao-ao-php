@@ -67,11 +67,11 @@ echo "<h2>Resultado de Combate</h2>
 ## Aula 02
 
 ### Criação do projeto
-- Criar uma pasta dentro de \xamppz\htdocs\[pasta_projeto].
+- Criar uma pasta dentro de \xamppz\htdocs\pasta_projeto.
 
 ## Aprendendo a inserir o PHP no código HTML
 
-Arquivo 'index.php'
+`Arquivo 'index.php'`
 
 ```php
 <!-- Sempre criar a sintaxe php -->
@@ -119,7 +119,7 @@ $saldo = $salario - ($aluguel + $contas);
 
 ```
 
-Arquivo 'operadores.php'
+`Arquivo 'operadores.php'`
 
 ```php
 <?php
@@ -205,7 +205,7 @@ if($clima == 'chuva'){
 
 ## Exercícios - Operadores
 
-Arquivo 'media.php'
+`Arquivo 'media.php'`
 
 ```php
 <?php
@@ -233,7 +233,7 @@ echo "Sua média: $media";
 
 ```
 
-Arquivo 'conversor.php'
+`Arquivo 'conversor.php'`
 
 ```php
 
@@ -359,9 +359,9 @@ foreach($estoque as $item){
 
 ```
 
-#Exercícios
+## Exercícios
 
-Arquivo 'cadastro.php'
+`Arquivo 'cadastro.php'`
 
 ```php
 <?php
