@@ -239,7 +239,6 @@ Arquivo 'conversor.php'
 
 <?php
 //Ler o valor em real e converter para dolar
-
 $valor = 1;
 $valorDolar = 5.60;
 //Usando o 'number_format' passamos como parametro
@@ -251,7 +250,103 @@ echo "Real para Dólar: U$ $valorFinal<br>";
 $valorFinal = number_format($valorDolar * $valor, 2, ',', '.');
 echo "Dólar para Real: R$ $valorFinal";
 
+// '.' é usado para concatenar no php
+
+echo '<br>Exemplo de '. 'concatenacao';
 
 ?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: black;
+            color: #fff;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    
+
+</body>
+</html>
+
+
+?>
+
+```
+
+## Aula 03
+
+Nesta aula começamos a aprender a utilizar arrays, fazer depuração com 'var_dump()' e criar arrays dentro de array
+
+```php
+
+<?php
+
+//Variaveis do tipo Array
+$carros = ['Civic G10', 'Amarok', 'Tiggo 7 Pro'];
+
+//O 'count' le o tamanho do array
+// for($i = 0; $i < count($compras); $i++){
+//     echo $compras[$i]. "<br>";
+// }
+
+//O 'var_dump' vai trazer informações para depuração como o tipo e a quantidade de elementos
+var_dump($carros);
+
+//Em vez de posições usando os numeros, é utilizado o apelido para aquela posição
+$carro = [
+    "modelo" => "Civic G10",
+    "cor" => "Cinza",
+    "marca" => "Honda",
+    "ano" => 2025
+];
+
+var_dump($carro);
+
+$estoque = [
+    ["modelo" => "Civic G10", "cor" => "Cinza", "marca" => "Honda", "ano" => 2025],
+    ["modelo" => "Amarok", "cor" => "Branco", "marca" => "Volkswagen", "ano" => 2019],
+    ["modelo" => "Tiggo 7 Pro", "cor" => "Branco", "marca" => "Caoacherry", "ano" => 2024]
+];
+echo '<br><br><br>';
+var_dump($estoque);
+
+echo '<br><br><br>';
+
+//Dizendo para o 'estoque' que cada Array nele se chama 'item'
+foreach($estoque as $item){
+    echo "<strong>Modelo: </strong>".$item['modelo']. " - <strong>Cor: </strong>".
+    $item['cor']. " - " . "<strong>Marca: </strong>". $item['marca']. " - " . "<strong>Ano: </strong>". $item['ano'] . "<br>";
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 03</title>
+    <style>
+        body{
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    
+</body>
+</html>
+
 
 ```
