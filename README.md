@@ -315,9 +315,9 @@ $carro = [
 var_dump($carro);
 
 $estoque = [
-    ["modelo" => "Civic G10", "cor" => "Cinza", "marca" => "Honda", "ano" => 2025],
-    ["modelo" => "Amarok", "cor" => "Branco", "marca" => "Volkswagen", "ano" => 2019],
-    ["modelo" => "Tiggo 7 Pro", "cor" => "Branco", "marca" => "Caoacherry", "ano" => 2024]
+    ["modelo" => "Civic G10", "cor" => "Cinza", "marca" => "Honda", "ano" => 2025, "foto" => "civic.png"],
+    ["modelo" => "Amarok", "cor" => "Branco", "marca" => "Volkswagen", "ano" => 2019, "foto" => "amarok.png"],
+    ["modelo" => "Tiggo 7 Pro", "cor" => "Branco", "marca" => "Caoacherry", "ano" => 2024, "foto" => "tiggo.jpg"]
 ];
 echo '<br><br><br>';
 var_dump($estoque);
@@ -327,7 +327,8 @@ echo '<br><br><br>';
 //Dizendo para o 'estoque' que cada Array nele se chama 'item'
 foreach($estoque as $item){
     echo "<strong>Modelo: </strong>".$item['modelo']. " - <strong>Cor: </strong>".
-    $item['cor']. " - " . "<strong>Marca: </strong>". $item['marca']. " - " . "<strong>Ano: </strong>". $item['ano'] . "<br>";
+    $item['cor']. " - " . "<strong>Marca: </strong>". $item['marca']. " - " . "<strong>Ano: </strong>". $item['ano'] . " - " . "<strong>Foto: </strong>" .
+     "<img src='".$item['foto']."'>" . "<br>";
 }
 
 ?>
@@ -345,6 +346,9 @@ foreach($estoque as $item){
             background: black;
             color: white;
         }
+        img{
+            width: 400px;
+        }
     </style>
 </head>
 <body>
@@ -352,6 +356,5 @@ foreach($estoque as $item){
     
 </body>
 </html>
-
 
 ```
