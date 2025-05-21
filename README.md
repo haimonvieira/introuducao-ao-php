@@ -358,3 +358,35 @@ foreach($estoque as $item){
 </html>
 
 ```
+
+#Exercícios
+
+Arquivo 'cadastro.php'
+
+```php
+<?php
+// nome, sobrenome, email e foto
+// deve conter 5 clientes
+$cliente = ["nome" => "Haimon", "sobrenome" => "Vieira", "email" => "haimon@mail.com", "foto" => "https://placehold.co/400"];
+
+$clientes = [
+    ["nome" => "Haimon", "sobrenome" => "Vieira", "email" => "haimon@mail.com", "foto" => "https://placehold.co/400"],
+    ["nome" => "Roverto", "sobrenome" => "Larguei", "email" => "robs@mail.com", "foto" => "https://placehold.co/400"],
+    ["nome" => "Vanvan", "sobrenome" => "Vonar", "email" => "vonar@mail.com", "foto" => "https://placehold.co/400"],
+    ["nome" => "Leop", "sobrenome" => "Old", "email" => "leopold@mail.com", "foto" => "https://placehold.co/400"],
+    ["nome" => "Niao", "sobrenome" => "Mi", "email" => "niaomi@mail.com", "foto" => "https://placehold.co/400"],
+];
+
+var_dump($clientes);
+
+echo '<br>';
+
+foreach($clientes as $item){
+    echo "<strong>Nome: </strong>".$item['nome']. " - <strong>Sobrenome: </strong>".
+    $item['sobrenome']. " - " . "<strong>E-mail: </strong>". $item['email']. " - " . "<strong>Foto: </strong>" . "<img src='".$item['foto']."'>" . "<br>";
+}
+
+?>
+
+
+```
