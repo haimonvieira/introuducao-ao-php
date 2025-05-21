@@ -255,6 +255,9 @@ echo "Dólar para Real: R$ $valorFinal";
 echo '<br>Exemplo de '. 'concatenacao';
 
 ?>
+```
+
+```html
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -328,7 +331,9 @@ foreach($estoque as $item){
 }
 
 ?>
+```
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
