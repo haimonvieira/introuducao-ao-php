@@ -678,3 +678,426 @@ $habilidades = $_POST['habilidade'];
 </html>
 
 ```
+
+
+## Aula 04
+
+Nesta aula aprendemos a fazer formulario usando select, option, checkbox e como captar e tratar dados de um array enviado pelo formulario e mostra-lo.
+
+`index.php`
+
+```html
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 04</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <h1 style="text-align: center; color: white;">Cadastro de Prefrências</h1>
+
+    <form action="receber.php" method="post">
+
+        <label for="nome">Nome</label>
+        <input type="text" name="nome">
+
+        <label for="genero">Gênero</label>
+        <div class="grupo">
+            <input type="radio" name="genero" value="masculino">Masculino
+            <input type="radio" name="genero" value="femenino">Femenino
+        </div>
+
+        <label>Serviços Assinados</label>
+        <div class="grupo">
+            <input type="checkbox" name="servicos[]" value="Netflix">Netflix
+            <input type="checkbox" name="servicos[]" value="Prime Video">Prime Video
+            <input type="checkbox" name="servicos[]" value="Disney+">Disney+
+            <input type="checkbox" name="servicos[]" value="Max (HBO)">Max (HBO)
+        </div>
+
+        <label>Estado</label>
+        <select name="estado" id="estado">
+            <option value="sp">sp</option>
+            <option value="rj">rj</option>
+            <option value="mg">mg</option>
+            <option value="pr">pr</option>
+        </select>
+
+        <label>Data de Nascimento</label>
+        <input type="date" name="nascimento">
+
+        <input type="submit" value="Enviar">
+
+    </form>
+    
+</body>
+</html>
+
+```
+
+`receber.php`
+
+```php
+
+<?php
+
+$nome = $_POST['nome'];
+$genero = $_POST['genero'];
+$servicos = $_POST['servicos'];
+$estado = strtoupper($_POST['estado']);
+$dataDeNascimento = $_POST['nascimento'];
+
+$formatarData = date('d/m/Y', strtotime($dataDeNascimento));
+
+
+?>
+
+
+```
+
+```html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferências</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <h1>Preferências</h1>
+
+    <p><strong>Nome: </strong><?= $nome?></p>
+    <p><strong>Gênero: </strong><?= $genero?></p>
+    <p><strong>Serviços Assinados: </strong>
+        <ul>
+            <?php
+
+                foreach($servicos as $servico){
+                    echo "<li>" . htmlspecialchars($servico) . "</li>";
+                }
+            ?>
+        </ul>
+    </p>
+    <p><strong>Estado: </strong><?= $estado?></p>
+    <p><strong>Data de Nascimento: </strong><?= $formatarData?></p>
+
+
+
+
+    
+</body>
+</html>
+
+```
+
+`estilos.css`
+
+```css
+
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    background: gray;
+}
+
+form{
+    background: #fff;
+    padding: 1.1rem;
+    border-radius: 10px;
+    width: 400px;
+    margin: 0 auto;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+input, select{
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.grupo{
+    margin-bottom: 10px;
+    background: #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    animation: slideInLeft .8s;
+}
+
+select{
+    text-transform: uppercase;
+}
+
+input[type="date"]{
+    font-size: .8rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@keyframes slideInLeft{
+
+    0%{
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+}
+
+```
+
+## Exercício
+
+Pasta `aula04/agendamento-odontologico`
+
+
+`index.php`
+
+```html
+
+<!-- 
+Agendamento Odontologico
+
+-Nome cliente
+
+Dentistas
+- Álvaro da Silva
+- Silvia Martins
+- Lucio Otavio
+
+Servicos
+- Limpeza
+- Clareamento
+- Ortodontia
+- Protse
+-Canal
+
+Data e hora(time) da consulta
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorriDente</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Bem vindo(a) a SorriDente!</h1>
+    <p>Onde seu sorriso tem brilho!</p>
+
+
+    <h2>Agende sua consulta agora! Preencha o formulário abaixo:</h2>
+
+    <form action="receber.php" method="post">
+
+        <div class="box">
+            <label for="dentista">Conheça nossos dentistas</label>
+            <select name="dentista" id="dentista">
+                <option value="Álvaro da Silva">Álvaro da Silva</option>
+                <option value="Silvia Martins">Silvia Martins</option>
+                <option value="Lúcio Otavio">Lúcio Otavio</option>
+            </select>
+        </div>
+
+        
+        <div class="box">
+            <label>Escolha o serviço</label>
+            <input type="checkbox" name="servicos[]" value="Limpeza">Limpeza
+            <input type="checkbox" name="servicos[]" value="Clareamento">Clareamento
+            <input type="checkbox" name="servicos[]" value="Ortodontia">Ortodontia
+            <input type="checkbox" name="servicos[]" value="Protese">Protese
+            <input type="checkbox" name="servicos[]" value="Canal">Canal
+        </div>
+
+        
+        <div class="box">
+            <label for="">Escolha a data da sua consulta</label>
+            <input type="date" name="data">
+            <input type="time" name="hora">
+        </div>
+
+        <input type="submit" value="Enviar">
+
+    </form>
+    
+</body>
+</html>
+
+```
+
+`receber.php`
+
+```php
+
+<?php
+
+$dentista = $_POST['dentista'];
+$servicos = $_POST['servicos'];
+$data = date("d/m/Y", strtotime($_POST['data']));
+$horario = $_POST['hora'];
+
+?>
+
+```
+
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1 style="text-align: center;">Sua Consulta</h1>
+    <div class="consulta">
+        <p><strong>Dentista: </strong><?= $dentista?></p>
+        <p><strong>Serviço(s):</strong>
+        <ul>
+            <?php
+            
+                foreach($servicos as $servico){
+
+                    if($servico == NULL){
+                        echo "Sem serviços.";
+                    }else{
+                        echo "<li>" . htmlspecialchars($servico) . "</li>";
+                    }
+                }
+
+            ?>
+            </ul>
+        </p>
+        <p><strong>Data da Consulta</strong>
+            <ul>
+                <li><strong>Data: </strong><?= $data?></li>
+                <li><strong>Horário: </strong><?= $horario?></li>
+            </ul>
+        </p>
+
+    </div>
+
+    <a href="index.php">Voltar ao Agendamento</a>
+
+
+    
+</body>
+</html>
+
+```
+
+`styles.css`
+
+```css
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 5rem;
+    background: #08979D;
+    color: #fff;
+}
+
+h1{
+    font-size: 3rem;
+}
+h2{
+    margin-top: 10rem;
+    text-align: center;
+}
+
+p{
+    font-size: 1.1rem;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: #99c1b9;
+    width: 50%;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+select{
+    padding: .5rem;
+    border-radius: 8px;
+    width: 50%;
+    font-size: 1rem;
+}
+
+input[type="checkbox"]{
+
+   font-size: 2em;
+}
+
+label{
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.box:nth-child(2){
+   font-size: 1.1rem;
+}
+
+input[type="date"], input[type="time"]{
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: .8rem;
+    padding: .5rem;
+    border-radius: 6px;
+
+}
+
+.consulta{
+    background: #99c1b9;
+    padding: 1rem;
+    border-radius: 12px;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    margin-top: 2rem;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: .5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+```
