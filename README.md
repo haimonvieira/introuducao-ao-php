@@ -1101,3 +1101,292 @@ a{
 }
 
 ```
+
+# Aula 05
+Fazer uma agenda
+
+`adicionar.php`
+
+```php
+
+<?php
+
+include('conexao.php');
+
+$sql = 'select * from contatos';
+$select = $pdo->query($sql);
+
+?>
+
+```
+
+```html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+        <h1>Adicionar Contato</h1>
+
+        <form action="opcontato.php?acao=cadastrar" method="post">
+            <div class="mb-3">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">E-mail</label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+
+            
+            <div class="mb-3">
+                <label for="telefone">Telefone</label>
+                <input type="text" name="telefone" id="telefone" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary me-3">Salvar</button>
+            <a href="index.php" class="btn btn-secondary">Voltar</a>
+        </form>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+```
+
+`conexao.php`
+
+
+```php
+
+<?php
+// Conexão com servidor local
+$host = 'localhost';
+$db = 'agenda';
+$user = 'root';
+$pass = '';
+
+try{
+
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+
+}catch(PDOException $e){
+    echo ("Houve um erro na conexão: " . $e->getMessage());
+}
+
+?>
+
+```
+
+`editar.php`
+
+
+```php
+
+<?php
+
+include('conexao.php');
+
+$id = $_GET['id'];
+
+$sql = 'select * from contatos where id = ?';
+$edit = $pdo->prepare($sql); //Quando tratar dado usar 'prepare'
+//Usar 'query' para consulta
+$edit->bindValue(1, $id);
+$edit->execute();
+
+$linha = $edit->fetch();
+
+
+?>
+
+```
+
+```html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+        <h1>Editar Contato</h1>
+
+        <form action="opcontato.php?acao=editar&id=<?php echo $linha['id'];?>" method="post">
+            <div class="mb-3">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control" require value="<?php echo $linha['nome'];?>">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">E-mail</label>
+                <input type="text" name="email" id="email" class="form-control" require value="<?php echo $linha['email'];?>">
+            </div>
+
+            
+            <div class="mb-3">
+                <label for="telefone">Telefone</label>
+                <input type="text" name="telefone" id="telefone" class="form-control" require value="<?php echo $linha['telefone'];?>">
+            </div>
+            <button type="submit" class="btn btn-primary me-3">Atualizar</button>
+            <a href="index.php" class="btn btn-secondary">Voltar</a>
+        </form>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+```
+
+`index.php`
+
+
+```html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+        
+        <h1>Agenda de Contatos</h1>
+        <a href="adicionar.php" class="btn btn-success mb-3">Adicionar contatos</a>
+
+        <table class="table table-bordered table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php
+                    $lista = $pdo->query('select * from contatos order by nome');
+
+                    while($linha = $lista->fetch()){
+                    
+                ?>
+                    <tr>
+                        <td><?php echo $linha['id'];?></td>
+                        <td><?php echo $linha['nome'];?></td>
+                        <td><?php echo $linha['email'];?></td>
+                        <td><?php echo $linha['telefone'];?></td>
+                        <td>
+                            <a href="editar.php?id=<?= $linha['id']?>" class="btn btn-warning">Editar</a>
+                            <a href="opcontato.php?acao=excluir&id=<?php echo $linha['id'];?>" class="btn btn-danger" onclick="return confirm('Tem certeza? A ação não poderá ser desfeita.')">Excluir</a>
+                        </td>
+                    </tr>
+                <?php }?>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+```
+
+`opcontato.php`
+
+
+```php
+
+<?php
+// O include pega o script e executa ele primeiro
+include('conexao.php');
+
+//Verificar se metodo for POST
+if($_POST){
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+}
+
+    if(isset($_GET['acao']) ){
+
+        if($_GET['acao'] === 'cadastrar'){
+
+       
+
+            $sql = "insert into contatos (nome, email, telefone) values
+            (?, ?, ?)";
+            //Tratamento de dados antes da inserção
+            $insert = $pdo->prepare($sql);
+
+            //Tratando os dados para serem inseridos no campo certo
+            $insert->bindValue(1, $nome);
+            $insert->bindValue(2, $email);
+            $insert->bindValue(3, $telefone);
+
+            $insert->execute();
+            //Voltar para a pagina inicial
+            header("Location:index.php");
+        } 
+
+    
+        if($_GET['acao'] === 'excluir'){
+            $id = $_GET['id'];
+            $sql = 'delete from contatos where id = ?';
+            $delete = $pdo->prepare($sql);
+            $delete->bindValue(1, $id);
+            $delete->execute();
+            header("Location:index.php");
+
+        }
+
+        if($_GET['acao'] === 'editar'){
+            $id = $_GET['id'];
+            $sql = 'update contatos set nome = ?, email = ?, telefone = ? where id = ?';
+            $edit = $pdo->prepare($sql);
+            $edit->bindValue(1, $nome);
+            $edit->bindValue(2, $email);
+            $edit->bindValue(3, $telefone);
+            $edit->bindValue(4, $id);
+            $edit->execute();
+            header("Location:index.php");
+
+        }
+
+    }
+
+
+?>
+
+```
+
+`styles.css`
+
+```css
+
+body{
+    background: #212121;
+    color: #fff;
+}
+
+```
